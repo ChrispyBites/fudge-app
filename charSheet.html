@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="root">
+    <div id="header">
+        <h1 id="characterName">Reve ad Texidore</h1>
+        <h2><span id="race">Human/Jenai</span> <span id="class">Keen Investigator</span></h2>
+        <div id="tabs">
+            <div class="tab isSelected" id="home">Home</div>
+            <div class="tab" id="skills">Skills</div>
+            <div class="tab" id="specials">Gifts/Faults</div>
+            <div class="tab" id="magic">Magic</div>
+            <div class="tab" id="contacts">Contacts</div>
+            <div class="tab" id="notes">Notes</div>
+        </div>
+    </div>
+
+    <div id="home_content" class="tab-content isSelected">
+        <div id="bio">
+            <div id="attributes">
+                <table>
+                    <tr onclick="rollFudge(-3)" class="rollButton">
+                        <td class="label">Strength</td>
+                        <td class="level">Terrible</td>
+                    </tr>
+                    <tr onclick="rollFudge(-2)" class="rollButton">
+                        <td class="label">Toughness</td>
+                        <td class="level">Poor</td>
+                    </tr>
+                    <tr onclick="rollFudge(0)"class="rollButton">
+                        <td class="label">Agility</td>
+                        <td class="level">Fair</td>
+                    </tr>
+                    <tr onclick="rollFudge(2)" class="rollButton">
+                        <td class="label">Intelligence</td>
+                        <td class="level">Great</td>
+                    </tr>
+                    <tr onclick="rollFudge(1)" class="rollButton">
+                        <td class="label">Charisma</td>
+                        <td class="level">Good</td>
+                    </tr>
+                    <tr onclick="rollFudge(2)" class="rollButton">
+                        <td class="label">Willpower</td>
+                        <td class="level">Great</td>
+                    </tr>
+                    <tr onclick="rollFudge(2)" class="rollButton">
+                        <td class="label">Perception</td>
+                        <td class="level">Great</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="portrait"><img src="./sample.png"/></div>
+        </div>
+
+        <div id="wounds">
+            <!-- Clickable wounds chart 
+                - Thumbscroll Left and Right.
+                - User taps noted wound category to add wound to level.
+                - Once category is filled, it can't be clicked again.
+                - ENHANCEMENT: Auto-subtract level when wound category is filled and PC has Condition. -->
+
+            <h2>Wounds</h2>
+            <div id="currentCondition"></div>
+            <div id="hitBoxes">
+                <div class="card" id="scratch">
+                    <div class="content">
+                        <h3>Scratch</h3>
+                        <p><span class="hitBoxCount">0</span> of 3</p>
+                        <p class="condition inactive">No negative effects</p>
+                        <a class="fwd" href="#hurt">&nbsp;</a>
+                    </div>
+                </div>
+                <div class="card" id="hurt">
+                    <div class="content">
+                        <a class="prev" href="#scratch">&nbsp;</a>
+                        <h3>Hurt</h3>
+                        <p><span class="hitBoxCount">0</span> of 2</p>
+                        <p class="condition inactive">-1 to Actions</p>
+                        <a class="fwd" href="#veryHurt">&nbsp;</a>
+                    </div>
+                </div>
+                <div class="card" id="veryHurt">
+                    <div class="content">
+                        <a class="prev" href="#hurt">&nbsp;</a>
+                        <h3>Very Hurt</h3>
+                        <p><span class="hitBoxCount">0</span> of 2</p>
+                        <p class="condition inactive">-2 to Actions</p>
+                        <a class="fwd" href="#incapacitated">&nbsp;</a>
+                    </div>
+                </div>
+                <div class="card" id="incapacitated">
+                    <div class="content">
+                        <a class="prev" href="#veryHurt">&nbsp;</a>
+                        <h3>Incapacitated</h3>
+                        <p><span class="hitBoxCount">0</span> of 1</p>
+                        <p class="condition inactive">-4 to Actions</p>
+                        <a class="fwd" href="#nearDeath">&nbsp;</a>
+                    </div>
+                </div>
+                <div class="card" id="nearDeath">
+                    <div class="content">
+                        <a class="prev" href="#incapacitated">&nbsp;</a>
+                        <h3>Near Death</h3>
+                        <p><span class="hitBoxCount">0</span> of 1</p>
+                        <p class="condition inactive">Death Clock</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="skills_content" class="tab-content">
+            <!-- Expandable sections for each skill group. Showing each skill and level.  User taps row and gets a rolled result.  Search bar can filter known skills. Maybe a brief description of each individual skill?  Combat/weapon skills... how to help with damage factor.  -->
+    </div>
+    <div id="specials_content" class="tab-content">
+    <!-- 
+        Gift and, if applicable, level.  Brief description of the gift.  Probably just descriptions here.  Anything actionable should be on Skills or Spells/Powers
+    -->
+    </div>
+    <div id="magic_content" class="tab-content">
+            <!--
+                Should this morph to work with both spells and powers (i.e. the Discipline)?
+                - Need a way to differentiate between different spell systems, maybe.  
+                - How to guide Gabby through sorcery vs. Bret through memorizing vs. Jason through activation/boon/bane cylce vs. hypothetical Devoted character.
+    
+            -->
+    </div>
+        
+    <div id="contacts_content" class="tab-content">
+        
+    </div>
+
+    <div id="notes_content" class="tab-content">
+
+    </div>
+    
+    
+  </div>
+  <div id="msgModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <p>You rolled <span id="rollResult"></span> and got a <span id="resultingLevel"></span>.</p>
+    </div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
